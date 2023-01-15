@@ -8,15 +8,18 @@ html {
 }
 
 body::-webkit-scrollbar {
-  width: 7px;
+  width: 10px;
 }
 
 body::-webkit-scrollbar-track {
-  background-color: whitesmoke;
+  background-color: #f0f0ef;
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: #3082ce;
+  background-color: #f0f0ef;
+}
+a {
+  text-decoration: none;
 }
 
 /*------------------------------------ Navbar CSS --------------------------------------- */
@@ -50,12 +53,29 @@ body::-webkit-scrollbar-thumb {
 .navbar img {
   height: 1.5rem;
   width: 2rem;
+  position: relative;
+}
+
+.product_count {
+  height: 20px;
+  width: 15px;
+  border-radius: 20px;
+  padding: 5px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 5px;
+  right: 55px;
 }
 
 /*------------------------------------ Search Box CSS --------------------------------------- */
 .search_bar {
-  text-align: center;
   margin: 6rem 0rem 3rem 0rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .search_bar input {
   width: 20rem;
@@ -68,7 +88,7 @@ body::-webkit-scrollbar-thumb {
   border-bottom: 2px solid grey;
 }
 .search_bar button {
-  padding: 0.4rem 1rem;
+  padding: 5px;
   border: 1px solid #979292;
   background-color: #979292;
   color: white;
@@ -76,12 +96,33 @@ body::-webkit-scrollbar-thumb {
   border-radius: 4px;
   font-size: 1rem;
 }
+.search_bar button > img {
+  height: 25px;
+  width: 30px;
+}
 
 .search_bar button:hover {
   opacity: 0.8;
   transition: 1 ease;
 }
 
+.open_sidebar_filter {
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+  background-color: #979292;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  display: none;
+}
+
+.open_sidebar_filter > img {
+  height: 25px;
+  width: 30px;
+}
 /*------------------------------------ Product Listing CSS --------------------------------------- */
 .product {
   width: 100%;
@@ -100,14 +141,18 @@ body::-webkit-scrollbar-thumb {
   width: 75%;
 }
 
+.left_side_bar > span {
+  display: none;
+}
 /*------------------------------------ Display Products CSS --------------------------------------- */
 .product_container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(auto 250px);
+  grid-template-rows: repeat(250px auto);
   gap: 50px;
 }
 .product_data {
+  height: max-content;
   border-radius: 0.5rem;
   padding: 0.8rem;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -166,4 +211,171 @@ body::-webkit-scrollbar-thumb {
 .checkbox_container p {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: 600;
+}
+
+/*------------------------------------ Pre Checkout Page CSS --------------------------------------- */
+.shopping_container {
+  width: 70%;
+  margin: 0.5rem auto;
+  padding: 2rem;
+  border-bottom: 2px solid grey;
+}
+
+.shopping_item {
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  justify-content: space-around;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.shopping_item img {
+  height: 4rem;
+  width: 5rem;
+}
+
+.shopping_item > div > p {
+  font-weight: 500;
+  size: 0.5rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.qnt_btn {
+  width: 6.5rem;
+  padding: 0.2rem 0.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid grey;
+  background-color: #f0f0ef;
+}
+
+.qnt_btn > button {
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 5px;
+  size: 100px;
+}
+
+.shopping_item > button {
+  padding: 0.4rem 1rem;
+  border: 1px solid #979292;
+  background-color: #979292;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.shopping_item > button:hover {
+  opacity: 0.8;
+  transition: 1 ease;
+}
+
+.total_price {
+  text-align: center;
+  font-weight: 600;
+  size: 3rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.empty_gif {
+  text-align: center;
+  margin-top: 5rem;
+}
+
+.backtohome_btn {
+  margin-top: 3rem;
+  padding: 0.4rem 1rem;
+  border: 1px solid #979292;
+  background-color: #979292;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.shopping_heading {
+  margin-top: 6rem;
+  text-align: center;
+}
+
+.shopping_heading > h1,
+.shopping_heading > h2 {
+  margin: 1rem;
+  text-align: center;
+  font-weight: 600;
+  size: 2rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/*------------------------------------Responsive For Mobile --------------------------------------- */
+
+@media (max-width: 751px) {
+  .navbar h2 {
+    display: none;
+  }
+
+  .open_sidebar_filter {
+    display: block;
+  }
+  .search_bar input {
+    width: 10rem;
+  }
+  .product_container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(250px auto);
+    gap: 50px;
+  }
+  .product_container {
+    padding: 0 2rem;
+  }
+  .product {
+    padding: 0 0rem;
+  }
+  .left_side_bar > span {
+    display: block;
+    font-size: 30px;
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
+  }
+
+  .left_side_bar {
+    width: 300px;
+    min-height: 100vh;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: -300px;
+    background-color: #fff;
+    padding: 1rem;
+    padding-left: 3rem;
+    margin-top: 3.5rem;
+    transition: all 0.4s ease-in-out;
+  }
+
+  .left_side_bar.active {
+    left: 0px;
+  }
+
+  /*------------------------------------Responsive Cart Page--------------------------------------- */
+  .shopping_item {
+    display: block;
+    text-align: center;
+  }
+  .shopping_item img {
+    width: 100%;
+    height: 100px;
+  }
+  .qnt_btn {
+    width: 70%;
+    margin: 10px auto;
+  }
+  .shopping_item > button {
+    width: 70%;
+  }
 }

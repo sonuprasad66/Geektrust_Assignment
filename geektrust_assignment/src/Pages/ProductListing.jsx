@@ -4,21 +4,28 @@ import { Sidebar } from "../Components/Sidebar";
 import { Context } from "../Context/Store";
 
 export const ProductListing = () => {
-  const { productData, setProductData } = useContext(Context);
+  const {
+    productData,
+    setProductData,
+    uniqueColor,
+    setFilterData,
+    openMenu,
+    setOpenMenu,
+  } = useContext(Context);
   const [mount, setMount] = useState(true);
 
   useEffect(() => {
     mount &&
       getProducts().then((res) => {
         setProductData(res);
+        uniqueColor(res);
+        setFilterData(res);
       });
 
     return () => {
       setMount(false);
     };
-  }, [mount, setProductData]);
-
-  // console.log(productData);
+  }, [mount, setProductData, setFilterData, uniqueColor]);
 
   const getProducts = async () => {
     return await fetch(
@@ -28,21 +35,31 @@ export const ProductListing = () => {
 
   return (
     <div className="product">
-      <div className="left_side_bar">
+      <div className={openMenu ? "left_side_bar active" : "left_side_bar"}>
+        <span onClick={() => setOpenMenu(false)}>x</span>
         <Sidebar />
       </div>
       <div className="product_container">
-        {productData &&
-          productData.map((item) => {
-            return (
-              <DisplayProducts
-                key={item.id}
-                name={item.name}
-                price={item.price}
-                image={item.imageURL}
-              />
-            );
-          })}
+        {productData.length > 0 ? (
+          <>
+            {productData &&
+              productData.map((item) => {
+                return <DisplayProducts key={item.id} item={item} />;
+              })}
+          </>
+        ) : (
+          <>
+            <div className="empty_gif">
+              <div>
+                <img
+                  src="https://media.tenor.com/W6YUgyV84o0AAAAM/cry-crying.gif"
+                  alt="gif"
+                />
+                <h2>No Products Available</h2>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

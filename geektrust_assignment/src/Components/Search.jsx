@@ -3,18 +3,11 @@ import { Context } from "../Context/Store";
 
 export const Search = () => {
   const [searchData, setSearchData] = useState("");
-  const {
-    productData,
-    setProductData,
-    color,
-    uniqueColor,
-    filterData,
-    setFilterData,
-  } = useContext(Context);
+  const { setProductData, filterData, openMenu, setOpenMenu } =
+    useContext(Context);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const data =
       filterData &&
       filterData.filter((item) => {
@@ -33,6 +26,10 @@ export const Search = () => {
     setSearchData("");
   };
 
+  const handleSidebar = () => {
+    setOpenMenu(true);
+  };
+
   return (
     <div className="search_bar">
       <form onSubmit={(e) => handleSubmit(e)}>
@@ -42,8 +39,19 @@ export const Search = () => {
           onChange={(e) => setSearchData(e.target.value)}
           value={searchData}
         />
-        <button type="submit">Search</button>
+        <button type="submit">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Search_Icon.svg/2048px-Search_Icon.svg.png"
+            alt="search"
+          />
+        </button>
       </form>
+      <div className="open_sidebar_filter" onClick={handleSidebar}>
+        <img
+          src="https://www.pngall.com/wp-content/uploads/11/Filter-PNG-Cutout.png"
+          alt="open_filter"
+        />
+      </div>
     </div>
   );
 };
